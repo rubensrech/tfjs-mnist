@@ -133,3 +133,40 @@ exports.evaluateModel = async function() {
     console.log('> Loss:', evalOutput[0].dataSync()[0].toFixed(3));
     console.log('> Accuracy:', evalOutput[1].dataSync()[0].toFixed(3));
 };
+
+
+
+
+function loadAnyExampleImg() {
+    let IMG_PATH = __dirname + '/examples/8/260.png';
+    return fs.readFileSync(IMG_PATH);
+};
+
+exports.predict = async function() {
+    await initModel();
+
+    let imgData;
+
+    // ------- Testing ----------
+    imgData = loadAnyExampleImg();
+    // ---------------------------
+
+    let img = new PNG({ colorType: 0 }).parse(imgData);
+    img.on('parsed', function() {
+        console.log(this.data.length); // 3136 = 784 * 4 channels = 28 * 28 * 4
+        let imgSize = this.height * this.width;
+        let bytesBuffer = new ArrayBuffer(imgSize * 4);
+        let bytesView = new Float32Array(bytesBuffer, 0, imgSize);
+        // Grayscale: all channels hold an equal
+        // Read only RED channel
+        for (let j = 0; j < this.data.length / 4; j++) {
+            bytesView[j] = this.data[j * 4] / 255;
+        }
+
+        let xs = tf.tensor4d(bytesView, [1, 28, 28, 1]);
+        const netOut = model.predict(xs);
+        const predictions = Array.from(netOut.argMax(1).dataSync());
+        console.log(predictions[0]);
+    });
+
+};
