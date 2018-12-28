@@ -18,6 +18,8 @@
   "homepage": "https://github.com/rubensrech/tfjs-mnist#readme",
   "dependencies": {
     "@tensorflow/tfjs-node": "^0.2.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "pngjs": "^3.3.3"
   }
 }
