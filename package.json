@@ -1,0 +1,22 @@
+{
+  "name": "tfjs-mnist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubensrech/tfjs-mnist.git"
+  },
+  "author": "Rubens Luiz Rech Junior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rubensrech/tfjs-mnist/issues"
+  },
+  "homepage": "https://github.com/rubensrech/tfjs-mnist#readme",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^0.2.1"
+  }
+}
