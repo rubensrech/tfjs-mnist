@@ -1,13 +1,12 @@
 const tf = require('@tensorflow/tfjs');
 require('@tensorflow/tfjs-node');
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const PNG = require('pngjs').PNG;
+const recognizer = require('./server/recognizer');
 
-// let model = require('./model');
-var app = express();
-var port = 3000;
+const app = express();
+const port = 3000;
 
 // > Configuration
 app.use(express.static(__dirname + '/public'));
@@ -16,12 +15,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.urlencoded({ extended : 'true' }));        // parse application/x-www-form-urlencoded
 
 // > Routes
-app.post('/api/rec', function(req, res) {
-    var imgBase64 = req.body.base64;
-    imgBase64 = imgBase64.split(',')[1];
-    var imgData = Buffer.from(imgBase64, 'base64');    
-    console.log(imgData.length);
-});
+recognizer(app);
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
@@ -33,4 +27,4 @@ app.all('*', function(req, res) {
 });
  
 app.listen(port);
-console.log("App listening on port " + port);
+console.log("Server listening on port " + port);

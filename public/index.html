@@ -18,21 +18,15 @@
             var fileReader = new FileReader();
             fileReader.onloadend = function(e) {
                 var fileData = fileReader.result;
-                console.log('here', fileData);
-
                 $.ajax({
                     type: "POST",
-                    url: '/api/rec',
-                    data: {
-                        base64: fileData
-                    },
+                    url: '/api/recognize-digit',
+                    dataType: 'JSON',
+                    data: { base64: fileData },
                     success: function(resp) {
                         console.log(resp);
-                    },
-                    dataType: 'json'
-                }).fail(function(err) {
-                    console.log(err, err.responseText);
-                });
+                    }
+                })
             };
             fileReader.readAsDataURL(file);
         });
