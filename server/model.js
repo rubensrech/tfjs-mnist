@@ -84,7 +84,7 @@ async function initModel(forceCreate = false) {
 
 // Public functions
 
-exports.trainModel = async function(epochs, modelSavePath = DEFAULT_MODEL_PATH) {
+exports.train = async function(epochs, modelSavePath = DEFAULT_MODEL_PATH) {
     await initModel(true);
 
     const LEARNING_RATE = 0.01;
@@ -123,7 +123,7 @@ exports.trainModel = async function(epochs, modelSavePath = DEFAULT_MODEL_PATH) 
     console.log(`Saved model to path: ${modelSavePath}`);
 };
 
-exports.evaluateModel = async function() {
+exports.evaluate = async function() {
     await initModel();
 
     // Data

@@ -12,6 +12,8 @@ function recognizeDigit(req, res) {
         const bytesBuffer = new ArrayBuffer(1 * imgSize * 4);
         const bytesView = new Float32Array(bytesBuffer, 0, imgSize);
 
+        // Grayscale: all channels (R,G,B) hold an equal value
+        // Just read the RED channel
         for (var j = 0; j < this.data.length / 4; j++) {
             bytesView[j] = this.data[j * 4] / 255;
         }
