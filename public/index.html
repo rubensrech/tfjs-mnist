@@ -2,34 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Digits recognition</title>
+    <title>Digits recognition (MNIST dataset)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="_css/main.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="_frameworks/jquery.min.js"></script>
+    <script src="_js/index.js"></script>
 </head>
 <body>
-    <h1>Digits recognition</h1>
+    <h1>Digits recognition (MNIST dataset)</h1>
+    <p>
+        Please, choose an image of a handwritten digit in grayscale with dimensions 28x28:
+        <br/>
+        <span class="small-text">The 'examples' directory include some test images.</span>
+    </p>
     <input type="file" id="imgPicker" accept=".png">
-
-    <script>
-        var input = document.querySelector('input');
-        input.addEventListener('change', function() {
-            var file = input.files[0];
-            var fileReader = new FileReader();
-            fileReader.onloadend = function(e) {
-                var fileData = fileReader.result;
-                $.ajax({
-                    type: "POST",
-                    url: '/api/recognize-digit',
-                    dataType: 'JSON',
-                    data: { base64: fileData },
-                    success: function(resp) {
-                        console.log(resp);
-                    }
-                })
-            };
-            fileReader.readAsDataURL(file);
-        });
-    </script>
+    <br/>
+    <div id="container1">
+        <img width="28" height="28" id="imgPreview" />
+        <span id="result"></span>
+    </div>
 </body>
 </html>
